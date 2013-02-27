@@ -1,8 +1,9 @@
 {
-  "name": "foxyri",
-  "fullName": "foxyri",
-  "description": "a basic add-on",
-  "author": "",
-  "license": "MPL 2.0",
-  "version": "0.1"
+    "name": "Foxyri", 
+    "license": "MPL 2.0", 
+    "author": "Chereji Mihai", 
+    "version": "0.1", 
+    "fullName": "Foxyri", 
+    "id": "jid1-ezL29t4nm8YGqQ", 
+    "description": "a basic add-on"
 }
