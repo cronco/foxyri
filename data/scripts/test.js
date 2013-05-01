@@ -2,20 +2,24 @@ console.log(document.URL);
 navigator.getMedia = ( navigator.getUserMedia ||
                        navigator.mozGetUserMedia);
  
-var audio = document.querySelector('audio');
-audio.setAttribute('controls', true);
-function startRec() {
-  navigator.getMedia ({
+//var audio = document.querySelector('audio'),
+var audio = new Audio(),
+    startRec = function() {
+      navigator.getMedia ({
         audio: true
-     },
-   
+      },
+     
      // successCallback
-     function(localMediaStream) {
-        audio.mozSrcObject = localMediaStream;
-        //audio.src = window.URL.createObjectURL(localMediaStream);
+     function(stream) {
+       console.log(audio.mozChannels);
+        audio.mozSrcObject = stream;
         audio.onloadedmetadata = function(e) {
-          console.log(e);
+          console.log("we have metadata!");
         };
+        var audioAvailable = function(e) {
+          console.log("We have audio!", e.frames);
+        };
+        audio.addEventListener('MozAudioAvailable', audioAvailable, false);
         audio.play();
      },
    
@@ -25,7 +29,8 @@ function startRec() {
      }
    
   );
-}
+};
+
 
 function stopRec() {
 
@@ -40,4 +45,6 @@ self.port.on("startrec", function(e) {
   startRec();
 });
 
+audio.mozSetup(2, 44100);
+console.log(audio.mozChannels);
 self.port.on("stoprec", stopRec);
